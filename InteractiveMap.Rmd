@@ -1,0 +1,25 @@
+---
+title: "Mount Rushmore"
+date: "October 21, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Where is it?
+
+Mount Rushmore National Memorial is a massive sculpture carved into Mt. Rushmore in the Black Hill region of South Dakota, USA.
+It depicts the faces of US presidents Washigton, Jefferson, Roosevelt, and Lincoln.  
+  
+    
+      
+Here is a map:
+
+```{r map}
+library(leaflet)
+info <- c("<a href='https://en.wikipedia.org/wiki/Mount_Rushmore'>Mount Rushmore: 13000 SD-244, Keystone, SD 57751, USA</a>")
+MtRshmr <- data.frame(lat=43.8790520, lng=-103.4588652)
+MtRshmr %>% leaflet() %>% addTiles() %>% addMarkers(popup=info)
+```
