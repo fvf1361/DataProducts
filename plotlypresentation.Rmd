@@ -1,0 +1,43 @@
+---
+title: "Body Mass Index (BMI)"
+date: "October 24, 2016"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r bmi, echo = FALSE}
+bmi <- read.csv("BMI.csv")
+race <- bmi[,1]
+uw <- bmi[,2]
+nm <- bmi[,3]
+ow <- bmi[,4]
+po <- bmi[,5]
+ob <- bmi[,6]
+suppressPackageStartupMessages(library(plotly))
+p <- plot_ly(bmi, x=~race, y=~uw, type='bar', name='Under Weight') %>% 
+  add_trace(y=~nm, name='Normal') %>% 
+  add_trace(y=~ow, name='Over Weight') %>% 
+  add_trace(y=~po, name='Pre Obese') %>% 
+  add_trace(y=~ob, name='Obese') %>% 
+  layout(yaxis=list(title='Percentage'), barmode='stack')
+
+```
+
+
+## Table of Contents
+
+- What is BMI
+- BMI in the USA
+
+## What is BMI
+
+BMI, short for Body Mass Index is a measure of the density of a person's body. It is a ratio of weight to height of a person. A healthy BMI is within a range. Too high or too low BMIs often lead to medical complexities and health issues.
+
+## BMI in the USA
+```{r pressure, echo=FALSE, warning=FALSE}
+p
+```
+
