@@ -1,0 +1,57 @@
+---
+title       : Shiny App Presentation
+subtitle    : October 26, 2016
+author      : 
+job         : 
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+github      :
+    user: fvf1361
+    repo: DataProducts
+---
+
+## Introduction
+The shiny app uses the father.son dataset.  
+The objective of this app is to demonstrate the importance of proper sampling in data analysis.  
+
+---
+
+## Exploratory data analysis
+Here is a summary of the dataset
+
+```{r exploratory, echo=TRUE, message=FALSE, warning=FALSE}
+library(UsingR)
+data("father.son")
+summary(father.son)
+```
+
+---
+
+## The App
+There are three parts in the app that the user can control. In order to run the app successfully, the following steps should be followed:
+
+> 1. Determine the range of data that goes into training using the first slider bar.
+> 2. Decide if the regression line is to be displayed or not by toggling the checkbox on/off.
+> 3. Assign the Value used for testing
+
+---
+
+## Results
+The black line is the regression line, and the vertical line is the value for which the son's height is estimated.  
+The red dot shows the estimated height for the given father's height.  
+```{r FinalPlot, echo=FALSE, warning=FALSE, message=FALSE}
+fs <- as.data.frame(father.son)
+x <- fs$fheight
+y <- fs$sheight
+plot(x,y, xlab = "father's height (inches)", ylab = "son's height (inches)", xlim = c(58, 77), ylim = c(58,80), pch=19, col="blue")
+abline(v=71, lwd=2, col="red")
+fit1 <- lm(y~x)
+a <- fit1$coefficients[2]
+b <- fit1$coefficients[1]
+abline(reg=fit1, lwd = 2, col="black")
+points(71, a*71+b, pch=16, cex=2, col="red")
+```
